@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -13,10 +12,9 @@ public class Main {
             System.out.println("2. Listar contactos");
             System.out.println("3. Buscar contacto");
             System.out.println("4. Eliminar contacto");
-            System.out.println("5. Contar contactos");
-            System.out.println("6. Guardar agenda");
-            System.out.println("7. Cargar agenda");
-            System.out.println("8. Filtrar contactos por grupo");
+            System.out.println("5. Exportar contactos a CSV");
+            System.out.println("6. Importar contactos desde CSV");
+            System.out.println("7. Mostrar estado de la agenda");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -37,7 +35,7 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("\n--- Lista de Contactos ---");
+                    System.out.println("Lista de contactos:");
                     for (Contacto c : agenda.listarContactos()) {
                         System.out.println(c);
                     }
@@ -46,9 +44,9 @@ public class Main {
                 case 3:
                     System.out.print("Ingrese el nombre del contacto a buscar: ");
                     String nombreBuscar = scanner.nextLine();
-                    Contacto encontrado = agenda.buscaContacto(nombreBuscar);
-                    if (encontrado != null) {
-                        System.out.println("Contacto encontrado: " + encontrado);
+                    Contacto contactoEncontrado = agenda.buscaContacto(nombreBuscar);
+                    if (contactoEncontrado != null) {
+                        System.out.println("Contacto encontrado: " + contactoEncontrado);
                     } else {
                         System.out.println("Contacto no encontrado.");
                     }
@@ -65,32 +63,23 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.println("Total de contactos: " + agenda.contarContactos());
+                    System.out.print("Ingrese la ruta del archivo para exportar (ejemplo: contactos.csv): ");
+                    String archivoExportar = scanner.nextLine();
+                    agenda.guardarAgenda(archivoExportar);
                     break;
 
                 case 6:
-                    System.out.print("Ingrese el nombre del archivo para guardar: ");
-                    String archivoGuardar = scanner.nextLine();
-                    agenda.guardarAgenda(archivoGuardar);
+                    System.out.print("Ingrese la ruta del archivo para importar (ejemplo: contactos.csv): ");
+                    String archivoImportar = scanner.nextLine();
+                    agenda.cargarAgenda(archivoImportar);
                     break;
 
                 case 7:
-                    System.out.print("Ingrese el nombre del archivo para cargar: ");
-                    String archivoCargar = scanner.nextLine();
-                    agenda.cargarAgenda(archivoCargar);
-                    break;
-
-                case 8:
-                    System.out.print("Ingrese el grupo para filtrar: ");
-                    String grupoFiltrar = scanner.nextLine();
-                    System.out.println("\n--- Contactos en el grupo: " + grupoFiltrar + " ---");
-                    for (Contacto c : agenda.listarContactosPorGrupo(grupoFiltrar)) {
-                        System.out.println(c);
-                    }
+                    agenda.mostrarEstadoAgenda(); // Mostrar estado de la agenda
                     break;
 
                 case 0:
-                    System.out.println("Saliendo de la agenda...");
+                    System.out.println("Saliendo...");
                     break;
 
                 default:

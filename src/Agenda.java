@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Agenda {
     private List<Contacto> contactos;
-    private final int capacidadMaxima = 50; // Límite de contactos
+    private final int capacidadMaxima = 10; // Límite de contactos
 
     public Agenda() {
         this.contactos = new ArrayList<>();
@@ -83,6 +83,7 @@ public class Agenda {
             System.out.println("Error al guardar la agenda: " + e.getMessage());
         }
     }
+
     public List<Contacto> listarContactosPorGrupo(String grupo) {
         List<Contacto> contactosFiltrados = new ArrayList<>();
         for (Contacto c : contactos) {
@@ -107,5 +108,11 @@ public class Agenda {
         } catch (IOException e) {
             System.out.println("Error al cargar la agenda: " + e.getMessage());
         }
+    }
+
+    public void mostrarEstadoAgenda() {
+        System.out.println("Número de contactos: " + contarContactos());
+        System.out.println("Capacidad máxima: " + capacidadMaxima);
+        System.out.println("Espacio libre: " + (capacidadMaxima - contarContactos()));
     }
 }
