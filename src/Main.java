@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -11,11 +12,12 @@ public class Main {
             System.out.println("1. Agregar contacto");
             System.out.println("2. Listar contactos");
             System.out.println("3. Buscar contacto");
-            System.out.println("4. Eliminar contacto");
-            System.out.println("5. Exportar contactos a CSV");
-            System.out.println("6. Importar contactos desde CSV");
-            System.out.println("7. Mostrar estado de la agenda");
-            System.out.println("0. Salir");
+            System.out.println("4. Modificar Contacto");
+            System.out.println("5. Eliminar contacto");
+            System.out.println("6. Exportar contactos a CSV");
+            System.out.println("7. Importar contactos desde CSV");
+            System.out.println("8. Mostrar estado de la agenda");
+                        System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar el buffer
@@ -53,6 +55,14 @@ public class Main {
                     break;
 
                 case 4:
+                    System.out.print("Ingrese el nombre del contacto a editar: ");
+                    nombre = scanner.nextLine();
+                    System.out.println("Ingrese el nuevo telefono: ");
+                    String nuevoTelefono = scanner.nextLine();
+                    agenda.modificarTelefono(nombre, nuevoTelefono);
+                    break;
+
+                case 5:
                     System.out.print("Ingrese el nombre del contacto a eliminar: ");
                     String nombreEliminar = scanner.nextLine();
                     if (agenda.eliminarContacto(nombreEliminar)) {
@@ -62,19 +72,19 @@ public class Main {
                     }
                     break;
 
-                case 5:
+                case 6:
                     System.out.print("Ingrese la ruta del archivo para exportar (ejemplo: contactos.csv): ");
                     String archivoExportar = scanner.nextLine();
                     agenda.guardarAgenda(archivoExportar);
                     break;
 
-                case 6:
+                case 7:
                     System.out.print("Ingrese la ruta del archivo para importar (ejemplo: contactos.csv): ");
                     String archivoImportar = scanner.nextLine();
                     agenda.cargarAgenda(archivoImportar);
                     break;
 
-                case 7:
+                case 8:
                     agenda.mostrarEstadoAgenda(); // Mostrar estado de la agenda
                     break;
 

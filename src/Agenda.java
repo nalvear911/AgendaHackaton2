@@ -25,7 +25,7 @@ public class Agenda {
 
         // Advertencia si se llega al 80% de la capacidad
         if (contactos.size() >= 0.8 * capacidadMaxima) {
-            System.out.println("Advertencia: La agenda está al 80% de su capacidad.");
+            System.out.println("Advertencia: La agenda superó al 80% de su capacidad.");
         }
 
         return true;
@@ -46,7 +46,7 @@ public class Agenda {
     }
 
     public List<Contacto> listarContactos() {
-        Collections.sort(contactos, Comparator.comparing(Contacto::getNombre));
+        Collections.sort(contactos, Comparator.comparing(Contacto::getNombre).thenComparing(Contacto::getApellido));
         return contactos;
     }
 
@@ -58,6 +58,21 @@ public class Agenda {
         }
         return null;
     }
+
+    public boolean modificarTelefono (String nombre, String nuevoTelefono){
+        Contacto contacto = buscaContacto(nombre);
+        if (contacto != null) {
+            contacto.setTelefono(nuevoTelefono);
+            System.out.println("El contacto se ha modificado correctamente");
+            return true;
+        }
+        else {
+            System.out.println("El contacto no existe");
+            return false;
+        }
+
+    }
+
 
     public boolean eliminarContacto(String nombre) {
         Contacto contacto = buscaContacto(nombre);
